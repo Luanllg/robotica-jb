@@ -1,7 +1,6 @@
 /* ===== CONFIGURAÇÃO — edite aqui ===== */
 const CONFIG = {
-  ARQUIVO: 'planilha.xlsx', // arquivo Excel na raiz do site (tem prioridade sobre o Google). Vazio = não usar
-  SHEET_ID: '1ijQXwkoQZngi6kbyQvbDkgUDH9lOe9ZycjbogVxPHsg',            // alternativa: ID de uma planilha Google pública
+  SHEET_ID: '1ijQXwkoQZngi6kbyQvbDkgUDH9lOe9ZycjbogVxPHsg',            // ID da planilha Google (Arquivo > Compartilhar > Publicar na web)
   ABAS: { projetos: 'Projetos', eventos: 'Eventos', noticias: 'Noticias' },
   FORM_URL: '',            // endereço do Formspree/Web3Forms; vazio = abre o e-mail do usuário
   EMAIL: 'erivelton.ramos@educacao.mg.gov.br',
@@ -78,40 +77,7 @@ const parseD = v => {
   m = /^(\d{4})-(\d{2})-(\d{2})/.exec(s); if (m) return new Date(+m[1], +m[2] - 1, +m[3]);
   return null; /* data inválida: o evento aparece em "próximos" em vez de sumir */
 };
-/* ---------- Dados a partir de um arquivo Excel (.xlsx) guardado junto do site ---------- */
-let xlsxLib;
-const getXlsx = () => xlsxLib || (xlsxLib = new Promise((ok, no) => {
-  if (window.XLSX) return ok(window.XLSX);
-  const s = document.createElement('script');
-  s.src = 'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js';
-  s.onload = () => ok(window.XLSX); s.onerror = no; document.head.appendChild(s);
-}));
-const p2 = n => String(n).padStart(2, '0');
-function linhaXlsx(r) {
-  const o = {};
-  for (const [k0, v] of Object.entries(r)) {
-    const k = k0.trim().toLowerCase();
-    if (k === 'data' && typeof v === 'number') { /* número de série do Excel -> data */
-      const u = new Date(Math.round((v - 25569) * 864e5));
-      o._d = new Date(u.getUTCFullYear(), u.getUTCMonth(), u.getUTCDate());
-      o.data = `${p2(o._d.getDate())}/${p2(o._d.getMonth() + 1)}/${o._d.getFullYear()}`;
-    } else if (k === 'hora' && typeof v === 'number') { /* fração do dia -> HH:MM */
-      const m = Math.round((v % 1) * 1440);
-      o.hora = `${p2(Math.floor(m / 60) % 24)}:${p2(m % 60)}`;
-    } else o[k] = v;
-  }
-  if (typeof o.data === 'string' && !o._d) o._d = parseD(o.data);
-  return o;
-}
-async function loadXlsx(key) {
-  const X = await getXlsx();
-  const wb = X.read(await (await fetch(CONFIG.ARQUIVO)).arrayBuffer());
-  const ws = wb.Sheets[CONFIG.ABAS[key]];
-  if (!ws) return FALLBACK[key];
-  return X.utils.sheet_to_json(ws, { defval: '' }).map(linhaXlsx).filter(o => o.titulo);
-}
 async function load(key) {
-  if (CONFIG.ARQUIVO) { try { return await loadXlsx(key); } catch (e) { return FALLBACK[key]; } }
   if (!CONFIG.SHEET_ID) return FALLBACK[key];
   try {
     const url = `https://docs.google.com/spreadsheets/d/${CONFIG.SHEET_ID}/gviz/tq?tqx=out:json&headers=1&sheet=${encodeURIComponent(CONFIG.ABAS[key])}`;
