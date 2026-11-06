@@ -1,8 +1,8 @@
 /* ===== CONFIGURAÇÃO — edite aqui ===== */
 const CONFIG = {
-  SHEET_ID: '',            // ID da planilha Google (Arquivo > Compartilhar > Publicar na web)
+  SHEET_ID: '1QMMF1ioChlFTkAknaav1pjEojtS7chdaAB7oB8MvJyg',            // ID da planilha Google (Arquivo > Compartilhar > Publicar na web)
   ABAS: { projetos: 'Projetos', eventos: 'Eventos', noticias: 'Noticias' },
-  FORM_URL: '1QMMF1ioChlFTkAknaav1pjEojtS7chdaAB7oB8MvJyg',            // endereço do Formspree/Web3Forms; vazio = abre o e-mail do usuário
+  FORM_URL: '',            // endereço do Formspree/Web3Forms; vazio = abre o e-mail do usuário
   EMAIL: 'erivelton.ramos@educacao.mg.gov.br',
   MAPA: 'Escola Estadual José Bonifácio, Poço Fundo - MG', // texto buscado no Google Maps (o pino abre no centro)
   ENDERECO: 'Rua Prefeito Edgard Ferreira, Centro — Poço Fundo, MG', // conferir o número com a direção
