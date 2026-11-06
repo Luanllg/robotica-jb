@@ -1,6 +1,6 @@
 /* ===== CONFIGURAÇÃO — edite aqui ===== */
 const CONFIG = {
-  SHEET_ID: '1QMMF1ioChlFTkAknaav1pjEojtS7chdaAB7oB8MvJyg',            // ID da planilha Google (Arquivo > Compartilhar > Publicar na web)
+  SHEET_ID: '1ijQXwkoQZngi6kbyQvbDkgUDH9lOe9ZycjbogVxPHsg',            // ID da planilha Google (Arquivo > Compartilhar > Publicar na web)
   ABAS: { projetos: 'Projetos', eventos: 'Eventos', noticias: 'Noticias' },
   FORM_URL: '',            // endereço do Formspree/Web3Forms; vazio = abre o e-mail do usuário
   EMAIL: 'erivelton.ramos@educacao.mg.gov.br',
