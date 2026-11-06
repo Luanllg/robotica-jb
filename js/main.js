@@ -1,7 +1,7 @@
 /* ===== CONFIGURAÇÃO — edite aqui ===== */
 const CONFIG = {
   ARQUIVO: 'planilha.xlsx', // arquivo Excel na raiz do site (tem prioridade sobre o Google). Vazio = não usar
-  SHEET_ID: 'FF7D56D498EB8333%21sfca1b248c1e24afe9aaa81b2f7e866d3&driveId=FF7D56D498EB8333&usid=cac38921-0746-4f27-a4e4-30fccf90df49',            // alternativa: ID de uma planilha Google pública
+  SHEET_ID: '1ijQXwkoQZngi6kbyQvbDkgUDH9lOe9ZycjbogVxPHsg',            // alternativa: ID de uma planilha Google pública
   ABAS: { projetos: 'Projetos', eventos: 'Eventos', noticias: 'Noticias' },
   FORM_URL: '',            // endereço do Formspree/Web3Forms; vazio = abre o e-mail do usuário
   EMAIL: 'erivelton.ramos@educacao.mg.gov.br',
